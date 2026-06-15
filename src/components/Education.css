@@ -1,0 +1,123 @@
+.edu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  max-width: 760px;
+  margin-bottom: 3rem;
+}
+
+.edu-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.edu-card--active {
+  border-color: rgba(255, 214, 120, 0.25);
+}
+
+.edu-card-active-bar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--grad-gold);
+}
+
+.edu-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.edu-icon {
+  font-size: 2rem;
+}
+
+.edu-ongoing-badge {
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  background: var(--gold-dim);
+  color: var(--gold);
+  border: 1px solid rgba(255,214,120,0.25);
+  letter-spacing: 0.04em;
+}
+
+.edu-degree {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+  color: var(--text);
+}
+
+.edu-uni {
+  font-size: 0.85rem;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.edu-period {
+  font-size: 0.78rem;
+  color: var(--text2);
+}
+
+/* Certification */
+.cert-section {
+  margin-top: 0.5rem;
+}
+
+.cert-heading {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  color: var(--text);
+}
+
+.cert-card {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 1.5rem 2rem;
+  max-width: 440px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.cert-card:hover {
+  border-color: var(--border2);
+  transform: translateY(-3px);
+}
+
+.cert-badge-icon {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(255,107,138,0.12), rgba(255,214,120,0.12));
+  border: 1px solid rgba(255,214,120,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.cert-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+  color: var(--text);
+}
+
+.cert-issuer {
+  font-size: 0.8rem;
+  color: var(--text2);
+}
+
+@media (max-width: 600px) {
+  .edu-grid { grid-template-columns: 1fr; }
+}
