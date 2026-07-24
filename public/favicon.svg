@@ -1,0 +1,8 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="32" cy="32" r="30" fill="#C85A32" />
+  <circle cx="32" cy="32" r="28" stroke="#F5E4DC" stroke-width="1.5" stroke-opacity="0.4" />
+  <!-- Monogram VS Text -->
+  <text x="32" y="38" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="22" font-weight="bold" fill="#FFFFFF">VS</text>
+  <!-- Botanical Leaf Accent Vector -->
+  <path d="M44 14 C 40 18, 48 24, 52 20 C 48 18, 46 14, 44 14 Z" fill="#F5E4DC" opacity="0.9" />
+</svg>

@@ -1,192 +1,214 @@
-import React, { useEffect, useRef } from 'react'
-import './Hero.css'
+import React, { useState } from 'react'
+import { motion } from 'framer-motion'
 
 export default function Hero() {
-  const canvasRef = useRef(null)
+  const [rotate, setRotate] = useState({ x: 0, y: 0 })
 
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')
-    let W, H, particles = [], raf
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const x = e.clientX - rect.left - rect.width / 2
+    const y = e.clientY - rect.top - rect.height / 2
+    setRotate({ x: -y / 25, y: x / 25 })
+  }
 
-    const resize = () => {
-      W = canvas.width = canvas.offsetWidth
-      H = canvas.height = canvas.offsetHeight
-    }
-
-    class Particle {
-      constructor() { this.reset() }
-      reset() {
-        this.x = Math.random() * W
-        this.y = Math.random() * H
-        this.r = Math.random() * 1.2 + 0.2
-        this.vx = (Math.random() - 0.5) * 0.2
-        this.vy = (Math.random() - 0.5) * 0.2
-        this.a = Math.random() * 0.35 + 0.05
-      }
-      update() {
-        this.x += this.vx; this.y += this.vy
-        if (this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.reset()
-      }
-      draw() {
-        ctx.beginPath()
-        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(255, 214, 120, ${this.a})`
-        ctx.fill()
-      }
-    }
-
-    resize()
-    for (let i = 0; i < 60; i++) particles.push(new Particle())
-
-    const animate = () => {
-      ctx.clearRect(0, 0, W, H)
-      particles.forEach(p => { p.update(); p.draw() })
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x
-          const dy = particles[i].y - particles[j].y
-          const d = Math.sqrt(dx * dx + dy * dy)
-          if (d < 90) {
-            ctx.beginPath()
-            ctx.moveTo(particles[i].x, particles[i].y)
-            ctx.lineTo(particles[j].x, particles[j].y)
-            ctx.strokeStyle = `rgba(255, 214, 120, ${0.07 * (1 - d / 90)})`
-            ctx.lineWidth = 0.5
-            ctx.stroke()
-          }
-        }
-      }
-      raf = requestAnimationFrame(animate)
-    }
-
-    animate()
-    window.addEventListener('resize', resize)
-    return () => {
-      cancelAnimationFrame(raf)
-      window.removeEventListener('resize', resize)
-    }
-  }, [])
+  const handleMouseLeave = () => {
+    setRotate({ x: 0, y: 0 })
+  }
 
   return (
-    <section className="hero" id="hero">
-      <canvas ref={canvasRef} className="hero-canvas" />
+    <section className="relative pt-32 pb-24 md:pt-36 md:pb-32 bg-[#F7F3EE] overflow-hidden" id="hero">
+      
+      {/* Background Soft Organic Vector Wave & Botanical Accents */}
+      <div className="absolute top-0 right-0 w-[550px] h-[550px] bg-[#EFE8DF] rounded-full blur-3xl -z-10 opacity-70 translate-x-1/3 -translate-y-1/4 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[450px] h-[450px] bg-[#F5E4DC] rounded-full blur-3xl -z-10 opacity-60 -translate-x-1/3 translate-y-1/4 pointer-events-none" />
 
-      {/* Ambient orbs */}
-      <div className="hero-orb orb-1" />
-      <div className="hero-orb orb-2" />
-      <div className="hero-orb orb-3" />
+      {/* Decorative Botanical Leaf Branch Flourish */}
+      <div className="absolute top-20 left-4 text-[#C85A32]/25 pointer-events-none hidden md:block">
+        <svg width="160" height="160" viewBox="0 0 200 200" fill="none">
+          <path d="M20 180 Q 100 100 180 20" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+          <path d="M60 140 C 40 110, 20 120, 30 90 C 50 90, 70 120, 60 140 Z" fill="currentColor" opacity="0.4" />
+          <path d="M100 100 C 80 70, 60 80, 70 50 C 90 50, 110 80, 100 100 Z" fill="currentColor" opacity="0.4" />
+          <path d="M140 60 C 120 30, 100 40, 110 10 C 130 10, 150 40, 140 60 Z" fill="currentColor" opacity="0.4" />
+        </svg>
+      </div>
 
-      {/* Background grid */}
-      <div className="hero-grid" aria-hidden="true" />
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          
+          {/* Left Column — Professional Copy Tailored to Frontend Developer & QA Executive */}
+          <div className="lg:col-span-6 space-y-6 text-center lg:text-left">
+            
+            {/* Professional Role Category Badge */}
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="flex items-center justify-center lg:justify-start gap-2 text-xs font-semibold tracking-[0.25em] uppercase text-[#66605B]"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C85A32" strokeWidth="1.8">
+                <path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9L12 2Z" />
+              </svg>
+              <span>FRONTEND DEVELOPER &amp; QA EXECUTIVE</span>
+            </motion.div>
 
-      <div className="hero-inner">
-        <div className="hero-badge reveal">
-          <span className="hero-badge-dot" />
-          Available for opportunities
-        </div>
+            {/* Professional Headline */}
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#2C2825] leading-[1.15]"
+            >
+              Crafting Pixel-Perfect UIs &amp; <br className="hidden sm:inline" />
+              <span className="italic font-normal text-[#C85A32] relative inline-block">
+                Flawless Quality Code
+                <svg className="absolute -bottom-3 left-0 w-full h-4 text-[#C85A32]" viewBox="0 0 220 16" fill="none">
+                  <path d="M4 12 C 50 2, 150 16, 216 6 C 180 14, 80 4, 30 12" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                </svg>
+              </span>
+            </motion.h1>
 
-        <h1 className="hero-title reveal d1">
-          <span className="hero-title-sub">Hello, I'm</span>
-          <span className="hero-title-name">Vaishnavi</span>
-          <span className="hero-title-italic">Shinde</span>
-        </h1>
+            {/* Tailored Professional Subtitle */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-sm sm:text-base text-[#66605B] max-w-xl mx-auto lg:mx-0 leading-relaxed font-sans"
+            >
+              Frontend Developer &amp; QA Executive combining React.js component engineering with rigorous quality assurance, cross-browser testing, and bug tracking. M.Sc. CS Graduate &amp; Hackathon Finalist.
+            </motion.p>
 
-        <p className="hero-tagline reveal d2">
-          Frontend Developer crafting{' '}
-          <strong>responsive, component-based UIs</strong> with React &amp; modern
-          web tech — turning designs into clean, <em>performant interfaces</em>.
-        </p>
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-4"
+            >
+              <a href="#projects" className="btn-terracotta text-sm py-3.5 px-7">
+                Explore Selected Work
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="ml-1">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+              <a href="#contact" className="btn-outline-dark text-sm py-3.5 px-7">
+                Get in Touch
+              </a>
+            </motion.div>
 
-        <div className="hero-actions reveal d3">
-          <a href="#projects" className="btn btn--primary">
-            View Projects
-            <ArrowRight />
-          </a>
-          <a href="#contact" className="btn btn--ghost">
-            Get in Touch
-          </a>
-          <a
-            href="https://github.com/vaishh002"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hero-github-link"
-            aria-label="GitHub"
-          >
-            <GithubIcon />
-          </a>
-        </div>
+            {/* 3 Feature Badges Row — ALL 3 FORCED ON THE EXACT SAME SINGLE LINE */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="pt-6 flex flex-nowrap items-center justify-center lg:justify-start gap-2 sm:gap-2.5 whitespace-nowrap overflow-x-auto lg:overflow-visible pb-1 scrollbar-none"
+            >
+              {/* Badge 1: React & Frontend */}
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#EFE8DF] border border-[#EAE3D9] text-[11px] font-medium text-[#2C2825] shadow-sm hover:border-[#C85A32]/40 transition-colors flex-shrink-0">
+                <div className="w-5 h-5 rounded-full bg-[#C85A32]/10 text-[#C85A32] flex items-center justify-center flex-shrink-0">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                    <polyline points="2 17 12 22 22 17" />
+                    <polyline points="2 12 12 17 22 12" />
+                  </svg>
+                </div>
+                <span>React &amp; Frontend</span>
+              </div>
 
-        <div className="hero-stats reveal d4">
-          <div className="hero-stat">
-            <span className="hero-stat-num">10<span className="hero-stat-plus">+</span></span>
-            <span className="hero-stat-lbl">Projects</span>
+              {/* Badge 2: QA & Testing Specialist */}
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#EFE8DF] border border-[#EAE3D9] text-[11px] font-medium text-[#2C2825] shadow-sm hover:border-[#464F38]/40 transition-colors flex-shrink-0">
+                <div className="w-5 h-5 rounded-full bg-[#464F38]/10 text-[#464F38] flex items-center justify-center flex-shrink-0">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    <polyline points="9 12 11 14 15 10" />
+                  </svg>
+                </div>
+                <span>QA &amp; Testing Specialist</span>
+              </div>
+
+              {/* Badge 3: Hackathon Finalist */}
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#EFE8DF] border border-[#EAE3D9] text-[11px] font-medium text-[#2C2825] shadow-sm hover:border-[#C85A32]/40 transition-colors flex-shrink-0">
+                <div className="w-5 h-5 rounded-full bg-[#C85A32]/10 text-[#C85A32] flex items-center justify-center flex-shrink-0">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+                    <path d="M4 22h16" />
+                    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+                    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+                    <path d="M18 2H6v7a6 6 0 0 0 12 0V2z" />
+                  </svg>
+                </div>
+                <span>Hackathon Finalist</span>
+              </div>
+            </motion.div>
+
           </div>
-          <div className="hero-stat-divider" />
-          <div className="hero-stat">
-            <span className="hero-stat-num">4<span className="hero-stat-plus">mo</span></span>
-            <span className="hero-stat-lbl">Internship</span>
-          </div>
-          <div className="hero-stat-divider" />
-          <div className="hero-stat">
-            <span className="hero-stat-num">5<span className="hero-stat-plus">+</span></span>
-            <span className="hero-stat-lbl">Tech Stack</span>
-          </div>
-        </div>
 
-        <div className="hero-scroll-hint reveal d5">
-          <svg width="20" height="32" viewBox="0 0 20 32">
-            <rect x="1" y="1" width="18" height="30" rx="9" stroke="currentColor" strokeWidth="1.5" fill="none" opacity="0.4" />
-            <circle cx="10" cy="9" r="3" fill="currentColor" opacity="0.6">
-              <animateTransform attributeName="transform" type="translate" values="0 0;0 12;0 0" dur="1.8s" repeatCount="indefinite" />
-            </circle>
-          </svg>
-          <span>Scroll to explore</span>
+          {/* Right Column — 3D Tilt Container & Image */}
+          <div className="lg:col-span-6 flex justify-center perspective-1000">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+              style={{
+                transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
+                transformStyle: 'preserve-3d',
+                transition: 'transform 0.15s ease-out',
+              }}
+              className="relative w-full max-w-[440px] cursor-pointer"
+            >
+              {/* Geometric Dot Matrix Array Vector */}
+              <div className="absolute -top-6 -right-6 w-32 h-32 opacity-25 pointer-events-none">
+                <svg width="100%" height="100%" fill="none">
+                  <pattern id="dotGridHeroSingle" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+                    <circle cx="3" cy="3" r="2.5" fill="#C85A32" />
+                  </pattern>
+                  <rect width="100%" height="100%" fill="url(#dotGridHeroSingle)" />
+                </svg>
+              </div>
+
+              {/* Asymmetric Rounded Container Shape */}
+              <div className="w-full bg-[#EFE8DF] rounded-[3.5rem] p-4 shadow-2xl border border-[#EAE3D9] relative overflow-hidden transform-gpu">
+                <div className="w-full h-[400px] sm:h-[460px] rounded-[3rem] overflow-hidden relative bg-[#F7F3EE]">
+                  <img
+                    src="/profile.jpg"
+                    alt="Vaishnavi Shinde"
+                    className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#2C2825]/40 via-transparent to-transparent opacity-60" />
+                </div>
+              </div>
+
+              {/* Floating Quality Badge Overlay */}
+              <div 
+                style={{ transform: 'translateZ(35px)' }}
+                className="absolute -bottom-4 -right-2 bg-white/95 backdrop-blur-md p-3.5 sm:p-4 rounded-2xl shadow-xl border border-[#EAE3D9] flex items-center gap-3 max-w-[210px]"
+              >
+                <div className="w-10 h-10 rounded-xl bg-[#464F38] text-white flex items-center justify-center flex-shrink-0 shadow-md">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    <polyline points="9 12 11 14 15 10" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-[#2C2825] leading-tight">QA Executive</p>
+                  <p className="text-[10px] font-medium text-[#464F38] mt-0.5">Frontend &amp; Quality Lead</p>
+                </div>
+              </div>
+
+            </motion.div>
+          </div>
+
         </div>
       </div>
 
-      {/* Decorative SVG code snippet */}
-      <div className="hero-code-deco reveal-right d3" aria-hidden="true">
-        <CodeDeco />
+      {/* Organic Bottom Wave Separator */}
+      <div className="w-full absolute bottom-0 left-0 right-0 overflow-hidden leading-none pointer-events-none">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block w-full h-12 text-[#EFE8DF] fill-current">
+          <path d="M0,0 C150,90 350,-40 500,45 C650,130 900,10 1200,40 L1200,120 L0,120 Z" />
+        </svg>
       </div>
     </section>
-  )
-}
-
-function ArrowRight() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
-}
-
-function GithubIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-    </svg>
-  )
-}
-
-function CodeDeco() {
-  return (
-    <div className="code-deco-card">
-      <div className="code-deco-dots">
-        <span style={{background:'#ff6b8a'}} />
-        <span style={{background:'#ffd678'}} />
-        <span style={{background:'#62f4c8'}} />
-      </div>
-      <pre className="code-deco-pre">
-        <span className="cd-key">const</span> <span className="cd-var">developer</span> <span className="cd-op">=</span> {'{'}
-        {'\n'}  <span className="cd-key">name</span><span className="cd-op">:</span> <span className="cd-str">'Vaishnavi Shinde'</span>,
-        {'\n'}  <span className="cd-key">role</span><span className="cd-op">:</span> <span className="cd-str">'Frontend Developer'</span>,
-        {'\n'}  <span className="cd-key">stack</span><span className="cd-op">:</span> [<span className="cd-str">'React'</span>, <span className="cd-str">'Vite'</span>,
-        {'\n'}           <span className="cd-str">'Tailwind'</span>],
-        {'\n'}  <span className="cd-key">open</span><span className="cd-op">:</span> <span className="cd-bool">true</span>,
-        {'\n'}{'}'}
-      </pre>
-    </div>
   )
 }
