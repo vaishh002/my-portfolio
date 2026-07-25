@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 
 const links = [
+  { href: '#about', label: 'About' },
   { href: '#projects', label: 'Work' },
   { href: '#experience', label: 'Experience' },
   { href: '#skills', label: 'Capabilities' },
-  { href: '#process', label: 'Process' },
-  { href: '#education', label: 'Education' },
+  { href: '#education', label: 'Academics' },
   { href: '#contact', label: 'Contact' },
 ]
 
@@ -29,25 +29,13 @@ export default function Navbar() {
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[#F7F3EE]/90 backdrop-blur-md shadow-sm py-3 border-b border-[#EAE3D9]' : 'bg-transparent py-5'}`}>
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
         
-        {/* Custom VS Brand Logo Emblem with Botanical Leaf Vector */}
-        <a href="#hero" className="flex items-center gap-3 group" onClick={close}>
-          <div className="relative w-10 h-10 rounded-full bg-[#C85A32] text-white flex items-center justify-center font-serif text-sm font-bold shadow-md transition-transform duration-300 group-hover:scale-105 overflow-hidden">
-            <span>VS</span>
-            {/* Embedded Botanical Leaf Vector Accent */}
-            <svg className="absolute -top-1 -right-1 w-5 h-5 text-[#F5E4DC] opacity-80" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10s10-4.48 10-10C22 6.48 17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" opacity="0" />
-              <path d="M17 8C14 8 10 12 10 17C15 17 19 13 19 8Z" />
-            </svg>
-          </div>
-
-          <div className="flex flex-col leading-none">
-            <span className="font-serif text-lg font-bold tracking-tight text-[#2C2825]">
-              Vaishnavi <span className="text-[#C85A32] font-normal italic">Shinde</span>
-            </span>
-            <span className="text-[10px] font-mono tracking-widest text-[#66605B] uppercase mt-0.5">
-              DEV &amp; QA PORTFOLIO
-            </span>
-          </div>
+        {/* Brand Logo Image from public/logo.png */}
+        <a href="#hero" className="flex items-center group" onClick={close}>
+          <img 
+            src="/logo.png" 
+            alt="Vaishnavi Shinde Logo" 
+            className="h-9 sm:h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
+          />
         </a>
 
         {/* Desktop Navigation Links */}

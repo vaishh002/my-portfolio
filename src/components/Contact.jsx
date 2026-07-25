@@ -101,7 +101,7 @@ export default function Contact() {
               </div>
 
               <div className="pt-2 flex items-center gap-4 justify-center lg:justify-start text-xs font-medium">
-                <a href="https://linkedin.com/in/vaishnavi-shinde" target="_blank" rel="noopener noreferrer" className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center gap-1.5">
+                <a href="https://www.linkedin.com/in/vaishnavi-shinde02/" target="_blank" rel="noopener noreferrer" className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center gap-1.5">
                   <span>LinkedIn Profile</span>
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <line x1="7" y1="17" x2="17" y2="7" />

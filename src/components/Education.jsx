@@ -5,8 +5,8 @@ const education = [
   {
     degree: 'M.Sc. Computer Science',
     college: 'Dr. D.Y. Patil Arts, Commerce & Science, Pune',
-    period: '2024 – April 2026 (Ongoing)',
-    status: 'Ongoing Master Degree',
+    period: '2024 – July 2026',
+    status: ' Master Degree',
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
@@ -17,8 +17,8 @@ const education = [
   {
     degree: 'B.Sc. Computer Science',
     college: 'Pratibha College of Commerce & Computer Science Studies, Pune',
-    period: 'Graduated April 2024',
-    status: 'Graduated Degree',
+    period: '2021 – April 2024',
+    status: 'Bachelor Degree',
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />

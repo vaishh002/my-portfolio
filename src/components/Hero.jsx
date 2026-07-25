@@ -77,20 +77,33 @@ export default function Hero() {
               Frontend Developer &amp; QA Executive combining React.js component engineering with rigorous quality assurance, cross-browser testing, and bug tracking. M.Sc. CS Graduate &amp; Hackathon Finalist.
             </motion.p>
 
-            {/* CTA Buttons */}
+            {/* CTA Buttons — Forced on same single line on desktop */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-4"
+              className="pt-2 flex flex-wrap lg:flex-nowrap items-center justify-center lg:justify-start gap-2.5 sm:gap-3 whitespace-nowrap"
             >
-              <a href="#projects" className="btn-terracotta text-sm py-3.5 px-7">
+              <a href="#projects" className="btn-terracotta text-xs sm:text-sm py-3 px-4 sm:px-5 flex-shrink-0">
                 Explore Selected Work
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="ml-1">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="ml-1">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
               </a>
-              <a href="#contact" className="btn-outline-dark text-sm py-3.5 px-7">
+              <a 
+                href="/resume.pdf" 
+                download="Vaishnavi_Shinde_Resume.pdf" 
+                className="btn-outline-dark text-xs sm:text-sm py-3 px-4 sm:px-5 flex items-center gap-1.5 flex-shrink-0" 
+                title="Download Vaishnavi's Resume PDF"
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                <span>Download Resume</span>
+              </a>
+              <a href="#contact" className="btn-outline-dark text-xs sm:text-sm py-3 px-4 sm:px-5 flex-shrink-0">
                 Get in Touch
               </a>
             </motion.div>
