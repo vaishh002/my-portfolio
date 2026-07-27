@@ -1,6 +1,5 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import './About.css'
 
 /* ── SVG Icons for Soft Skills ───────────────────────────── */
 const skillIcons = {
@@ -112,57 +111,65 @@ const contactDetails = [
   },
 ]
 
+/* ── Milestones — the section's signature element ───────── */
+const milestones = [
+  {
+    year: '2026',
+    title: 'Joined Athenura as Frontend Intern',
+    desc: 'Started hands-on industry work building React.js interfaces for live client projects.',
+    accent: '#C85A32',
+  },
+  {
+    year: '2026',
+    title: '5th place · 48-hour AI Hackathon',
+    desc: 'Placed among the top teams out of 30+ competitors, building an AI career-guidance platform.',
+    accent: '#464F38',
+  },
+  {
+    year: '2026',
+    title: 'Promoted to QA Executive',
+    desc: 'Moved from Frontend Intern to owning quality assurance, cross-browser testing, and bug tracking.',
+    accent: '#C85A32',
+  },
+  {
+    year: '2026',
+    title: 'M.Sc. Computer Science',
+    desc: 'Deepening core CS foundations at Dr.D.Y. Patil Arts, Commerce and Science College, Pune.',
+    accent: '#464F38',
+  },
+]
+
 /* ── Framer Motion Variants ──────────────────────────────── */
 const containerVariants = {
   hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
-  },
+  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
 }
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 35, filter: 'blur(8px)' },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: 'blur(0px)',
-    transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] },
-  },
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] } },
 }
 
 const fadeLeft = {
-  hidden: { opacity: 0, x: -40 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.65, ease: [0.25, 0.46, 0.45, 0.94] },
-  },
+  hidden: { opacity: 0, x: -32 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] } },
 }
 
 const fadeRight = {
-  hidden: { opacity: 0, x: 40 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.65, ease: [0.25, 0.46, 0.45, 0.94] },
-  },
+  hidden: { opacity: 0, x: 32 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] } },
 }
 
 const scaleIn = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
-  },
+  hidden: { opacity: 0, scale: 0.85 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] } },
 }
 
 /* ── MAIN COMPONENT ──────────────────────────────────────── */
 export default function About() {
   return (
-    <section className="py-28 bg-[#F7F3EE] relative overflow-hidden" id="about">
-
-      {/* ── Decorative Botanical SVG (Top-Right) ── */}
+    <section className="py-20 sm:py-24 lg:py-28 bg-[#F7F3EE] relative overflow-hidden" id="about">
+      {/* Decorative botanical flourish */}
       <div className="absolute top-16 right-8 text-[#C85A32]/15 pointer-events-none hidden lg:block">
         <svg width="180" height="180" viewBox="0 0 200 200" fill="none">
           <path d="M20 180 Q 100 100 180 20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
@@ -172,7 +179,7 @@ export default function About() {
         </svg>
       </div>
 
-      {/* ── Decorative Dot Grid (Bottom-Left) ── */}
+      {/* Decorative dot grid */}
       <div className="absolute bottom-16 left-8 opacity-[0.06] pointer-events-none hidden md:block">
         <svg width="140" height="140" fill="none">
           <pattern id="aboutDotGrid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
@@ -183,92 +190,95 @@ export default function About() {
       </div>
 
       <motion.div
-        className="max-w-6xl mx-auto px-6 relative z-10"
+        className="max-w-6xl mx-auto px-5 sm:px-6 relative z-10"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: '-80px' }}
       >
-
-        {/* ── Section Header ── */}
-        <motion.div className="text-center mb-16" variants={fadeUp}>
-          <p className="text-xs font-semibold tracking-[0.3em] uppercase text-[#C85A32] font-sans flex items-center justify-center gap-2">
+        {/* Section Header */}
+        <motion.div className="text-center mb-14 sm:mb-16" variants={fadeUp}>
+          <p className="text-[11px] sm:text-xs font-semibold tracking-[0.3em] uppercase text-[#C85A32] font-sans flex items-center justify-center gap-2">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C85A32" strokeWidth="2">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
               <circle cx="12" cy="7" r="4" />
             </svg>
-            WHO I AM
+            Who I am
           </p>
-          <h2 className="font-serif text-4xl md:text-5xl font-normal text-[#2C2825] mt-3">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-[#2C2825] mt-3">
             About <span className="italic text-[#C85A32]">Me</span>
           </h2>
-          <p className="font-script text-2xl text-[#66605B] max-w-lg mx-auto mt-1">
+          <p className="font-script text-xl sm:text-2xl text-[#66605B] max-w-lg mx-auto mt-1">
             Bridging frontend design precision with quality assurance
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+          {/* ═══ LEFT — Profile card (sticky on desktop) ═══ */}
+          <motion.div className="lg:col-span-5 lg:sticky lg:top-24" variants={fadeLeft}>
+            <div className="bg-white rounded-3xl border border-[#EAE3D9] shadow-warm p-6 sm:p-7 relative overflow-hidden">
+              {/* Corner accent */}
+              <div className="absolute -top-10 -right-10 w-28 h-28 rounded-full bg-[#C85A32]/[0.06] pointer-events-none" />
 
-          {/* ═══════════ LEFT COLUMN — Profile Card ═══════════ */}
-          <motion.div className="lg:col-span-5" variants={fadeLeft}>
-            <div className="about-profile-card p-6">
-
-              {/* Avatar + Name Header */}
-              <div className="flex items-center gap-4 pb-5 mb-5 border-b border-[#EAE3D9]">
-                <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden border-2 border-[#C85A32]/25 shadow-md flex-shrink-0 bg-[#F7F3EE] relative">
+              {/* Avatar + name */}
+              <div className="flex items-center gap-4 pb-5 mb-5 border-b border-[#EAE3D9] relative">
+                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden border-2 border-[#C85A32]/25 shadow-md shrink-0 bg-[#F7F3EE]">
                   <img
                     src="/profile.jpg"
                     alt="Vaishnavi Shinde"
-                    className="w-full h-full object-cover object-top filter brightness-[1.02] contrast-[1.03]"
-                    style={{ imageRendering: '-webkit-optimize-contrast' }}
+                    className="w-full h-full object-cover object-top"
                   />
                 </div>
-                <div>
-                  <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#2C2825] leading-tight">
+                <div className="min-w-0">
+                  <h3 className="font-serif text-lg sm:text-xl font-bold text-[#2C2825] leading-tight">
                     Vaishnavi Shinde
                   </h3>
                   <p className="text-xs sm:text-sm font-semibold text-[#C85A32] mt-1">
                     Frontend Developer &amp; QA Executive
                   </p>
-                  <p className="text-xs text-[#66605B] mt-0.5 font-medium">
+                  <p className="text-[11px] sm:text-xs text-[#66605B] mt-0.5 font-medium">
                     M.Sc. Computer Science
                   </p>
                 </div>
               </div>
 
-              {/* Contact Details List */}
+              {/* Contact list */}
               <div className="space-y-3">
                 {contactDetails.map((item, idx) => {
                   const Wrapper = item.href ? 'a' : 'div'
                   const wrapperProps = item.href
-                    ? { href: item.href, target: item.href.startsWith('mailto') ? undefined : '_blank', rel: 'noopener noreferrer' }
+                    ? {
+                        href: item.href,
+                        target: item.href.startsWith('mailto') ? undefined : '_blank',
+                        rel: 'noopener noreferrer',
+                      }
                     : {}
                   return (
                     <motion.div
                       key={idx}
-                      initial={{ opacity: 0, x: -15 }}
+                      initial={{ opacity: 0, x: -12 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
-                      transition={{ delay: 0.3 + idx * 0.08, duration: 0.4 }}
+                      transition={{ delay: 0.25 + idx * 0.07, duration: 0.4 }}
                     >
                       <Wrapper
                         {...wrapperProps}
-                        className={`flex items-center gap-3 text-sm text-[#66605B] ${item.href ? 'hover:text-[#C85A32] transition-colors cursor-pointer' : ''}`}
+                        className={`flex items-center gap-3 text-[13px] sm:text-sm text-[#66605B] ${
+                          item.href ? 'hover:text-[#C85A32] transition-colors cursor-pointer' : ''
+                        }`}
                       >
-                        <div className="w-9 h-9 rounded-xl bg-[#C85A32]/10 text-[#C85A32] flex items-center justify-center flex-shrink-0">
+                        <span className="w-9 h-9 rounded-xl bg-[#C85A32]/10 text-[#C85A32] flex items-center justify-center shrink-0">
                           {item.icon}
-                        </div>
-                        <span className={item.label.includes('@') ? 'break-all' : ''}>
-                          {item.label}
                         </span>
+                        <span className={item.label.includes('@') ? 'break-all' : ''}>{item.label}</span>
                       </Wrapper>
                     </motion.div>
                   )
                 })}
               </div>
 
-              {/* Social Links Row */}
-              <div className="pt-5 mt-5 border-t border-[#EAE3D9] flex items-center gap-3">
+              {/* Social links */}
+              <div className="pt-5 mt-5 border-t border-[#EAE3D9] flex flex-wrap items-center gap-3">
                 <a
                   href="https://github.com/vaishh002"
                   target="_blank"
@@ -293,86 +303,135 @@ export default function About() {
                 </a>
               </div>
 
-              {/* Availability Badge */}
+              {/* Availability badge */}
               <div className="mt-5 pt-4 border-t border-[#EAE3D9]">
-                <div className="about-availability-badge">
-                  <span className="about-pulse-dot" />
-                  Open to Full-Time &amp; Internship Opportunities
+                <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-[#464F38]/10 text-[#464F38] text-[11px] sm:text-xs font-semibold">
+                  <span className="relative flex h-2 w-2 shrink-0">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#464F38] opacity-60" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#464F38]" />
+                  </span>
+                  Open to full-time &amp; internship opportunities
                 </div>
+              </div>
+
+              {/* ── Key competencies — moved here, inside the left card ── */}
+              <div className="mt-5 pt-5 border-t border-[#EAE3D9]">
+                <p className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#2C2825] mb-3 flex items-center gap-2">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C85A32" strokeWidth="2">
+                    <path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9L12 2Z" />
+                  </svg>
+                  Key professional competencies
+                </p>
+                <motion.div className="flex flex-wrap gap-2" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+                  {softSkills.map((skill) => (
+                    <motion.span
+                      key={skill.name}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F7F3EE] border border-[#EAE3D9] text-[11px] font-medium text-[#2C2825] hover:border-[#C85A32]/40 hover:shadow-sm transition-all"
+                      variants={scaleIn}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.97 }}
+                    >
+                      <span className="text-[#C85A32]">{skill.icon}</span>
+                      {skill.name}
+                    </motion.span>
+                  ))}
+                </motion.div>
               </div>
             </div>
           </motion.div>
 
-          {/* ═══════════ RIGHT COLUMN — Bio & Skills ═══════════ */}
-          <div className="lg:col-span-7 space-y-6">
-
-            {/* Bio Heading */}
-            <motion.h3
-              className="font-serif text-3xl lg:text-[2.1rem] font-bold text-[#2C2825] leading-snug"
-              variants={fadeRight}
-            >
-              Building modern web experiences,{' '}
-              <span className="italic text-[#C85A32] relative">
-                one component at a time
-                <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#C85A32]/40" viewBox="0 0 200 12" fill="none">
-                  <path d="M2 8 C 40 2, 100 12, 198 4" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-                </svg>
-              </span>
-            </motion.h3>
-
-            {/* Bio Paragraphs */}
-            <motion.div className="space-y-4 text-sm text-[#66605B] leading-relaxed font-sans" variants={fadeUp}>
-              <p>
-                I am a passionate{' '}
-                <strong className="text-[#2C2825] about-text-highlight">Frontend Developer and QA Executive</strong>{' '}
-                with 6 months of hands-on industry internship experience at Athenura. Currently pursuing my{' '}
-                <strong className="text-[#2C2825]">Master of Science (M.Sc.) in Computer Science</strong>{' '}
-                at Dr.D.Y. Patil Arts, Commerce and Science College, Pune.
-              </p>
-              <p>
-                My expertise spans creating{' '}
-                <strong className="text-[#2C2825] about-text-highlight">responsive, component-driven UIs</strong>{' '}
-                with React.js, Vite, JavaScript (ES6+), and Tailwind CSS — alongside rigorous quality assurance, UI testing, cross-browser validation, and bug tracking across live client projects.
-              </p>
-              <p>
-                Having earned <strong className="text-[#2C2825]">5th place in a 48-hour AI Hackathon</strong> among 30+ competing teams and received a <strong className="text-[#2C2825]">promotion from Frontend Intern to QA Executive</strong>, I thrive in collaborative team environments and fast-paced development sprints.
-              </p>
-            </motion.div>
-
-            {/* ── Key Competencies / Soft Skills ── */}
-            <motion.div variants={fadeUp}>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#2C2825] mb-3 flex items-center gap-2">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C85A32" strokeWidth="2">
-                  <path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9L12 2Z" />
-                </svg>
-                Key Professional Competencies
-              </p>
-              <motion.div
-                className="flex flex-wrap gap-2"
-                variants={containerVariants}
+          {/* ═══ RIGHT — Bio, timeline ═══ */}
+          <div className="lg:col-span-7 space-y-10 sm:space-y-12">
+            <div className="space-y-5 sm:space-y-6">
+              <motion.h3
+                className="font-serif text-2xl sm:text-3xl lg:text-[2.1rem] font-bold text-[#2C2825] leading-snug"
+                variants={fadeRight}
               >
-                {softSkills.map((skill) => (
-                  <motion.span
-                    key={skill.name}
-                    className="about-skill-pill"
-                    variants={scaleIn}
-                    whileHover={{ scale: 1.06 }}
-                    whileTap={{ scale: 0.97 }}
+                Building modern web experiences,{' '}
+                <span className="italic text-[#C85A32] relative inline-block">
+                  one component at a time
+                  <svg
+                    className="absolute -bottom-2 left-0 w-full h-2.5 sm:h-3 text-[#C85A32]/40"
+                    viewBox="0 0 200 12"
+                    fill="none"
                   >
-                    <span className="text-[#C85A32]">{skill.icon}</span>
-                    {skill.name}
-                  </motion.span>
-                ))}
-              </motion.div>
-            </motion.div>
+                    <path d="M2 8 C 40 2, 100 12, 198 4" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                  </svg>
+                </span>
+              </motion.h3>
 
+              <motion.div className="space-y-4 text-[13px] sm:text-sm text-[#66605B] leading-relaxed font-sans" variants={fadeUp}>
+                <p>
+                  I am a passionate{' '}
+                  <strong className="text-[#2C2825] font-semibold">Frontend Developer and QA Executive</strong> with 6
+                  months of hands-on industry internship experience at Athenura. Currently pursuing my{' '}
+                  <strong className="text-[#2C2825] font-semibold">Master of Science (M.Sc.) in Computer Science</strong>{' '}
+                  at Dr.D.Y. Patil Arts, Commerce and Science College, Pune.
+                </p>
+                <p>
+                  My expertise spans creating{' '}
+                  <strong className="text-[#2C2825] font-semibold">responsive, component-driven UIs</strong> with
+                  React.js, Vite, JavaScript (ES6+), and Tailwind CSS — alongside rigorous quality assurance, UI
+                  testing, cross-browser validation, and bug tracking across live client projects.
+                </p>
+              </motion.div>
+            </div>
+
+            {/* ── Milestone timeline — signature element ── */}
+            <motion.div variants={fadeUp}>
+              <p className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#2C2825] mb-5 flex items-center gap-2">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C85A32" strokeWidth="2">
+                  <path d="M12 8v4l3 3" />
+                  <circle cx="12" cy="12" r="10" />
+                </svg>
+                The journey so far
+              </p>
+
+              <div className="relative pl-8 sm:pl-9">
+                <div className="absolute left-[7px] sm:left-[8px] top-1 bottom-1 w-px bg-[#EAE3D9]" />
+                <div className="space-y-7 sm:space-y-8">
+                  {milestones.map((m, i) => (
+                    <motion.div
+                      key={m.title}
+                      initial={{ opacity: 0, x: -16 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, margin: '-40px' }}
+                      transition={{ delay: i * 0.1, duration: 0.5 }}
+                      className="relative"
+                    >
+                      <span
+                        className="absolute -left-8 sm:-left-9 top-0.5 w-4 h-4 rounded-full border-2 bg-[#F7F3EE]"
+                        style={{ borderColor: m.accent }}
+                      />
+                      <div className="flex items-center gap-2 mb-1">
+                        <span
+                          className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full"
+                          style={{ backgroundColor: `${m.accent}14`, color: m.accent }}
+                        >
+                          {m.year}
+                        </span>
+                      </div>
+                      <h4 className="font-serif text-base sm:text-lg font-bold text-[#2C2825] leading-snug">
+                        {m.title}
+                      </h4>
+                      <p className="text-[12.5px] sm:text-sm text-[#66605B] leading-relaxed mt-1">{m.desc}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </motion.div>
 
-      {/* ── Organic Bottom Wave Separator ── */}
+      {/* Organic bottom wave separator */}
       <div className="w-full absolute bottom-0 left-0 right-0 overflow-hidden leading-none pointer-events-none">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block w-full h-12 fill-current" style={{ color: '#EFE8DF' }}>
+        <svg
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
+          className="relative block w-full h-10 sm:h-12 fill-current"
+          style={{ color: '#EFE8DF' }}
+        >
           <path d="M0,0 C150,90 350,-40 500,45 C650,130 900,10 1200,40 L1200,120 L0,120 Z" />
         </svg>
       </div>
