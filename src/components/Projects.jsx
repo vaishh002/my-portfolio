@@ -11,6 +11,7 @@ import {
   Eye,
   ExternalLink,
   X,
+  Building2,
 } from 'lucide-react'
 import './Projects.css'
 
@@ -23,7 +24,16 @@ function GithubIcon({ size = 14, ...rest }) {
   )
 }
 
-const categories = ['All Work', 'AI & Web', 'Enterprise ERP', 'Web Apps', 'Events & LMS']
+/* Inline SVG for LinkedIn icon */
+function LinkedinIcon({ size = 14, ...rest }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...rest}>
+      <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.7a1.6 1.6 0 1 0 1.6 1.6c0-.88-.72-1.6-1.6-1.6z" />
+    </svg>
+  )
+}
+
+const categories = ['All Work', 'Athenura Projects', 'AI & Web', 'Enterprise ERP', 'Web Apps', 'Events & LMS']
 
 const projects = [
   {
@@ -34,6 +44,9 @@ const projects = [
     desc: 'A comprehensive e-commerce and sports management platform featuring category showcases, team gear collections, product highlights, customer testimonials, and custom bulk pricing requests.',
     tech: ['React.js', 'Vite', 'Tailwind CSS', 'Framer Motion'],
     status: 'Live',
+    company: 'Athenura',
+    companyUrl: 'https://athenura.in',
+    companyLinkedin: 'https://www.linkedin.com/company/athenura/',
     github: 'https://github.com/Yash21743/Athenura_sportwaer.git',
     demo: 'https://confy-sportware.vercel.app/',
     category: 'Web Apps',
@@ -49,6 +62,9 @@ const projects = [
     desc: 'AI-powered career guidance platform with personalized learning paths, resume analysis, ATS score checker powered by Gemini API, and role-specific interview preparation.',
     tech: ['React.js', 'Node.js', 'MongoDB', 'Gemini API', 'Tailwind CSS'],
     status: 'Live',
+    company: 'Athenura',
+    companyUrl: 'https://athenura.in',
+    companyLinkedin: 'https://www.linkedin.com/company/athenura/',
     award: 'Hackathon · 5th place, June 2026',
     github: 'https://github.com/vaishh002/SkillBridgeAI',
     demo: 'https://skill-bridge-ai-theta.vercel.app',
@@ -65,6 +81,9 @@ const projects = [
     desc: 'Role-based project management portal for modern organizations. Features instant real-time DOM updates, clear role hierarchies (Admin, Manager, Team Lead, Intern), daily reporting, and performance analytics dashboards.',
     tech: ['React.js', 'Node.js', 'MongoDB', 'Express', 'JavaScript'],
     status: 'Live',
+    company: 'Athenura',
+    companyUrl: 'https://athenura.in',
+    companyLinkedin: 'https://www.linkedin.com/company/athenura/',
     github: 'https://github.com/vaishh002/TaskManagementSystem',
     demo: 'https://task-management-system-zeta-ten.vercel.app',
     category: 'Enterprise ERP',
@@ -80,6 +99,9 @@ const projects = [
     desc: 'Full-featured hackathon event portal with 4-step builder guide, domain tracks (AI, FinTech, SpaceTech, HealthTech), builder testimonials, and real-time registration stats.',
     tech: ['React.js', 'Vite', 'Tailwind CSS', 'Node.js'],
     status: 'Live',
+    company: 'Athenura',
+    companyUrl: 'https://athenura.in',
+    companyLinkedin: 'https://www.linkedin.com/company/athenura/',
     github: 'https://github.com/bimalgautam1/Hackathon-Athenura',
     demo: 'https://hackathon.athenura.in/hackathons',
     category: 'Events & LMS',
@@ -95,6 +117,9 @@ const projects = [
     desc: 'Responsive learning management system dedicated to Sanskrit education. Features online/offline learning mode selection, course listings, faculty profiles, and student feedback modules.',
     tech: ['React.js', 'Vite', 'Node.js', 'MongoDB'],
     status: 'Live',
+    company: 'Athenura',
+    companyUrl: 'https://athenura.in',
+    companyLinkedin: 'https://www.linkedin.com/company/athenura/',
     github: 'https://github.com/AtharvBhorkar/kaumudi-academy',
     demo: 'https://vaidehiiacademy.vercel.app/',
     category: 'Events & LMS',
@@ -110,6 +135,9 @@ const projects = [
     desc: 'Responsive travel blog and booking site featuring ride selections, popular getaway packages, smart travel guides, guest reviews, and upcoming tour departures.',
     tech: ['React.js', 'Vite', 'Tailwind CSS', 'Node.js'],
     status: 'Live',
+    company: 'Athenura',
+    companyUrl: 'https://athenura.in',
+    companyLinkedin: 'https://www.linkedin.com/company/athenura/',
     github: 'https://github.com/AtharvBhorkar/ATAT.git',
     demo: 'https://www.amantourandtravel.in/',
     category: 'Web Apps',
@@ -124,7 +152,11 @@ export default function Projects() {
   const [selectedModalProject, setSelectedModalProject] = useState(null)
 
   const filteredProjects =
-    activeTab === 'All Work' ? projects : projects.filter((p) => p.category === activeTab)
+    activeTab === 'All Work'
+      ? projects
+      : activeTab === 'Athenura Projects'
+      ? projects.filter((p) => p.company === 'Athenura')
+      : projects.filter((p) => p.category === activeTab)
 
   return (
     <section className="py-20 sm:py-28 bg-[#EFE8DF] relative overflow-hidden" id="projects">
@@ -140,7 +172,24 @@ export default function Projects() {
             Featured <span className="italic text-[#C85A32]">Projects</span>
           </h2>
           <p className="font-script text-xl sm:text-2xl text-[#66605B] max-w-lg mx-auto mt-1">
-            Hover over any project screenshot to auto-scroll the page view, or click the eye icon for a full preview.
+            Production web applications built during my QA &amp; Frontend Internship at{' '}
+            <a
+              href="https://athenura.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-[#C85A32] font-sans font-semibold text-base transition-colors"
+            >
+              Athenura
+            </a>{' '}
+            (<a
+              href="https://www.linkedin.com/company/athenura/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#0077B5] hover:underline font-sans text-sm inline-flex items-center gap-1 font-semibold"
+            >
+              <LinkedinIcon size={12} />
+              LinkedIn Profile
+            </a>)
           </p>
         </div>
 
@@ -166,7 +215,10 @@ export default function Projects() {
                       transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                     />
                   )}
-                  <span className="relative">{cat}</span>
+                  <span className="relative flex items-center gap-1.5">
+                    {cat === 'Athenura Projects' && <Building2 size={12} />}
+                    {cat}
+                  </span>
                 </button>
               )
             })}
@@ -277,12 +329,18 @@ function ProjectRow({ project: p, reversed, onOpenModal }) {
             )}
           </div>
 
-          {/* Top badge indicator */}
-          <div className="absolute top-3 left-3 z-20 pointer-events-none">
+          {/* Top badges indicator */}
+          <div className="absolute top-3 left-3 z-20 pointer-events-none flex items-center gap-1.5 flex-wrap">
             <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/90 backdrop-blur-md text-[#2C2825] shadow-sm border border-white/40 flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               Live Project
             </span>
+            {p.company && (
+              <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#464F38]/90 backdrop-blur-md text-white shadow-sm flex items-center gap-1">
+                <Building2 size={10} />
+                Athenura Project
+              </span>
+            )}
           </div>
         </div>
       </div>
@@ -308,6 +366,18 @@ function ProjectRow({ project: p, reversed, onOpenModal }) {
               >
                 ● {p.status}
               </span>
+              {p.company && (
+                <a
+                  href={p.companyUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-[#464F38]/10 text-[#464F38] hover:bg-[#464F38] hover:text-white transition-colors flex items-center gap-1"
+                  title="Athenura Official Website"
+                >
+                  <Building2 size={10} />
+                  Athenura
+                </a>
+              )}
             </div>
 
             <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#2C2825] leading-tight flex items-center gap-2.5">
@@ -342,7 +412,7 @@ function ProjectRow({ project: p, reversed, onOpenModal }) {
             </div>
 
             <div className="flex items-center gap-3 mt-6">
-              {/* Eye Button for quick preview */}
+              {/* Eye Button for quick screenshot preview */}
               <button
                 onClick={onOpenModal}
                 className="px-4 py-2.5 rounded-xl border border-[#2C2825]/20 hover:border-[#2C2825] bg-white text-[#2C2825] text-[12px] font-semibold inline-flex items-center gap-2 transition-all duration-200 hover:shadow-sm"
@@ -384,7 +454,7 @@ function ProjectRow({ project: p, reversed, onOpenModal }) {
   )
 }
 
-/* ── Lightbox Modal Component for Full High-Res Screenshot View ── */
+/* ── Responsive Lightbox Modal Component for Full High-Res Screenshot View ── */
 function ProjectModal({ project, onClose }) {
   // Close on Escape key
   useEffect(() => {
@@ -401,50 +471,63 @@ function ProjectModal({ project, onClose }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.25 }}
-      className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-3 sm:p-6"
+      className="modal-backdrop-fixed"
       onClick={onClose}
     >
       <motion.div
-        initial={{ scale: 0.94, opacity: 0, y: 16 }}
+        initial={{ scale: 0.95, opacity: 0, y: 12 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
-        exit={{ scale: 0.94, opacity: 0, y: 16 }}
-        transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-        className="bg-[#FBF9F5] w-full max-w-5xl max-h-[92vh] rounded-3xl overflow-hidden shadow-2xl flex flex-col border border-[#EAE3D9] z-50 relative"
+        exit={{ scale: 0.95, opacity: 0, y: 12 }}
+        transition={{ type: 'spring', stiffness: 320, damping: 28 }}
+        className="modal-dialog-box"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Modal Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#EAE3D9] bg-white shrink-0">
-          <div className="flex items-center gap-3">
+        {/* Modal Header — Fixed at Top */}
+        <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-[#EAE3D9] bg-white shrink-0 shadow-sm z-20">
+          <div className="flex items-center gap-3 min-w-0 pr-2">
             <span
-              className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"
+              className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shrink-0 hidden sm:inline-block"
               style={{ backgroundColor: `${project.accent}14`, color: project.accent }}
             >
               {project.category}
             </span>
-            <div>
-              <h3 className="font-serif text-lg sm:text-xl font-bold text-[#2C2825] leading-tight">
+            <div className="min-w-0">
+              <h3 className="font-serif text-base sm:text-lg md:text-xl font-bold text-[#2C2825] leading-tight truncate">
                 {project.title}
               </h3>
-              <p className="text-xs text-[#66605B]">{project.subtitle}</p>
+              <p className="text-[11px] sm:text-xs text-[#66605B] truncate">{project.subtitle}</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            {project.companyLinkedin && (
+              <a
+                href={project.companyLinkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[11px] font-semibold text-[#0077B5] hover:underline hidden md:inline-flex items-center gap-1"
+                title="Athenura LinkedIn Profile"
+              >
+                <LinkedinIcon size={12} />
+                <span>Athenura LinkedIn</span>
+              </a>
+            )}
             {project.demo && (
               <a
                 href={project.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-terracotta text-xs py-2 px-4 inline-flex items-center gap-1.5 hidden sm:inline-flex"
+                className="btn-terracotta text-xs py-1.5 sm:py-2 px-3 sm:px-4 inline-flex items-center gap-1.5"
               >
                 <span>Live Site</span>
-                <ExternalLink size={14} />
+                <ExternalLink size={13} />
               </a>
             )}
             <button
               onClick={onClose}
               aria-label="Close modal"
-              className="w-9 h-9 rounded-full bg-[#EAE3D9]/60 hover:bg-[#C85A32] hover:text-white text-[#2C2825] flex items-center justify-center transition-colors duration-200"
+              title="Close (Esc)"
+              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#EAE3D9]/70 hover:bg-[#C85A32] hover:text-white text-[#2C2825] flex items-center justify-center transition-colors duration-200"
             >
               <X size={18} />
             </button>
@@ -452,12 +535,12 @@ function ProjectModal({ project, onClose }) {
         </div>
 
         {/* Modal Body: Scrollable Full Screenshot */}
-        <div className="overflow-y-auto modal-screenshot-scroll p-4 sm:p-6 flex-1 bg-[#EFE8DF]/50">
+        <div className="overflow-y-auto modal-screenshot-scroll p-3 sm:p-6 flex-1 bg-[#EFE8DF]/40">
           <div className="max-w-4xl mx-auto">
             <img
               src={project.image}
               alt={`${project.title} Full Page Screenshot`}
-              className="w-full h-auto rounded-2xl shadow-md border border-[#EAE3D9] block"
+              className="w-full h-auto rounded-xl sm:rounded-2xl shadow-md border border-[#EAE3D9] block"
             />
           </div>
         </div>

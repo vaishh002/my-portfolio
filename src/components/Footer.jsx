@@ -24,13 +24,21 @@ export default function Footer() {
           Designed &amp; Developed with care in Pune, Maharashtra · © {year}
         </p>
 
-        <div className="flex items-center gap-4 text-[#A39C96]">
+        <div className="flex items-center gap-3.5 text-[#A39C96] flex-wrap justify-center">
           <a href="https://linkedin.com/in/vaishnavi-shinde02/" target="_blank" rel="noopener noreferrer" className="hover:text-[#C85A32] transition-colors">
             LinkedIn
           </a>
           <span>·</span>
           <a href="https://github.com/vaishh002" target="_blank" rel="noopener noreferrer" className="hover:text-[#C85A32] transition-colors">
             GitHub
+          </a>
+          <span>·</span>
+          <a href="https://athenura.in" target="_blank" rel="noopener noreferrer" className="hover:text-[#C85A32] transition-colors">
+            Athenura
+          </a>
+          <span>·</span>
+          <a href="https://www.linkedin.com/company/athenura/" target="_blank" rel="noopener noreferrer" className="hover:text-[#C85A32] transition-colors">
+            Athenura LinkedIn
           </a>
           <span>·</span>
           <a href="#hero" className="hover:text-[#C85A32] transition-colors">
