@@ -6,6 +6,7 @@ const experiences = [
     role: 'QA Executive',
     note: 'Promoted from Frontend Developer Intern in recognition of performance & detail orientation',
     company: 'Athenura (Remote)',
+    website: 'https://athenura.in',
     period: 'May 2026 – Present',
     badge: 'PROMOTION',
     current: true,
@@ -26,6 +27,7 @@ const experiences = [
     role: 'Frontend Developer Intern',
     note: 'Core Frontend Engineering Team',
     company: 'Athenura (Remote)',
+    website: 'https://athenura.in',
     period: 'Feb 2026 – Present',
     badge: 'INTERNSHIP',
     current: false,
@@ -39,7 +41,7 @@ const experiences = [
     points: [
       'Built and maintained 10+ responsive UI pages and reusable React components for the live Athenura website.',
       'Translated Figma mockups into pixel-accurate React components using Vite-based architecture.',
-      'Contributed to the Jay-Bhadra team project — implemented multi-page layouts and resolved 15+ UI bugs.',
+      'Contributed to implementing multi-page layouts and resolved 15+ UI bugs.',
       'Collaborated with 3+ developers via Git branching, pull requests, and code reviews on shared repositories.',
     ],
   },
@@ -185,7 +187,26 @@ function ExperienceCard({ exp, align }) {
       </div>
 
       <h3 className="font-serif text-xl sm:text-2xl font-bold text-white leading-tight">{exp.role}</h3>
-      <p className="text-[11px] sm:text-xs font-semibold text-[#F5E4DC] mt-1">{exp.company}</p>
+      <div className="mt-1">
+        {exp.website ? (
+          <a 
+            href={exp.website} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-[11px] sm:text-xs font-semibold text-[#F5E4DC] hover:text-white transition-colors inline-flex items-center gap-1.5 hover:underline"
+            title="Visit Athenura Official Website"
+          >
+            <span>{exp.company}</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-[#C85A32]">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <polyline points="15 3 21 3 21 9" />
+              <line x1="10" y1="14" x2="21" y2="3" />
+            </svg>
+          </a>
+        ) : (
+          <p className="text-[11px] sm:text-xs font-semibold text-[#F5E4DC]">{exp.company}</p>
+        )}
+      </div>
       <p className="text-[11.5px] sm:text-xs italic text-[#DCE2D3]/80 mt-2.5 border-b border-[#626C50] pb-3">
         "{exp.note}"
       </p>
@@ -201,7 +222,19 @@ function ExperienceCard({ exp, align }) {
 
       <div className="pt-5 mt-4 border-t border-[#626C50]/60 flex items-center justify-between text-[10.5px] sm:text-[11px] text-[#DCE2D3]">
         <span>Verified role</span>
-        <span className="text-[#F5E4DC] font-medium text-right">{exp.location}</span>
+        <div className="flex items-center gap-2">
+          {exp.website && (
+            <a 
+              href={exp.website} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-[#C85A32] hover:text-[#F5E4DC] font-mono text-[10px] underline tracking-tight"
+            >
+              athenura.in ↗
+            </a>
+          )}
+          <span className="text-[#F5E4DC] font-medium text-right">{exp.location}</span>
+        </div>
       </div>
     </div>
   )

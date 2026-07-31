@@ -30,7 +30,7 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
         
         {/* Brand Logo Image from public/logo.png */}
-        <a href="#hero" className="flex items-center group" onClick={close}>
+        <a href="#hero" className="flex items-center group shrink-0" onClick={close}>
           <img 
             src="/logo.png" 
             alt="Vaishnavi Shinde Logo" 
@@ -38,8 +38,8 @@ export default function Navbar() {
           />
         </a>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-8" aria-label="Primary">
+        {/* Desktop Navigation Links (shows at lg: 1024px+) */}
+        <nav className="hidden lg:flex items-center gap-5 xl:gap-8" aria-label="Primary">
           {links.map((l) => (
             <a
               key={l.href}
@@ -52,7 +52,7 @@ export default function Navbar() {
         </nav>
 
         {/* CTA & Command Palette Trigger */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden lg:flex items-center gap-3">
           <button
             onClick={triggerCommandPalette}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#EFE8DF] border border-[#EAE3D9] text-[11px] font-medium text-[#66605B] hover:border-[#C85A32]/40 hover:text-[#C85A32] transition-all"
@@ -66,9 +66,9 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Mobile Hamburger Button */}
+        {/* Mobile & Tablet Hamburger Button (shows below lg: <1024px) */}
         <button
-          className="md:hidden flex flex-col gap-1.5 p-2 text-[#2C2825]"
+          className="lg:hidden flex flex-col gap-1.5 p-2 text-[#2C2825] focus:outline-none"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
@@ -78,9 +78,9 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile & Tablet Menu Dropdown */}
       {menuOpen && (
-        <div className="md:hidden bg-[#F7F3EE] border-b border-[#EAE3D9] px-6 py-6 space-y-4 shadow-lg animate-fade-in">
+        <div className="lg:hidden bg-[#F7F3EE] border-b border-[#EAE3D9] px-6 py-6 space-y-4 shadow-lg animate-fade-in">
           {links.map((l) => (
             <a
               key={l.href}

@@ -21,9 +21,10 @@
   padding: 0;
 }
 
-html {
-  scroll-behavior: smooth;
-  font-size: 16px;
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -31,8 +32,13 @@ body {
   color: var(--charcoal);
   font-family: 'Inter', system-ui, sans-serif;
   line-height: 1.6;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  touch-action: manipulation;
+}
+
+/* Prevent auto zoom on iOS Safari inputs */
+input, select, textarea {
+  font-size: 16px !important;
 }
 
 /* ── SCROLLBAR ───────────────────────────────────────── */

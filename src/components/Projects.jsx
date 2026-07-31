@@ -1,17 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   ArrowUpRight,
   Trophy,
   Sparkles,
-  Boxes,
   ListChecks,
   CalendarDays,
   GraduationCap,
+  ShoppingBag,
+  Eye,
+  ExternalLink,
+  X,
 } from 'lucide-react'
+import './Projects.css'
 
-/* lucide-react dropped brand/logo icons (Github, Twitter, etc.) in recent
-   versions, so the GitHub mark is a small inline SVG instead. */
+/* Inline SVG for GitHub icon */
 function GithubIcon({ size = 14, ...rest }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...rest}>
@@ -24,83 +27,101 @@ const categories = ['All Work', 'AI & Web', 'Enterprise ERP', 'Web Apps', 'Event
 
 const projects = [
   {
-    id: 'skillbridge-ai',
+    id: 'comfy-sportware',
     index: '01',
+    title: 'Comfy Sportware',
+    subtitle: 'E-commerce & Sports Management Platform',
+    desc: 'A comprehensive e-commerce and sports management platform featuring category showcases, team gear collections, product highlights, customer testimonials, and custom bulk pricing requests.',
+    tech: ['React.js', 'Vite', 'Tailwind CSS', 'Framer Motion'],
+    status: 'Live',
+    github: 'https://github.com/Yash21743/Athenura_sportwaer.git',
+    demo: 'https://confy-sportware.vercel.app/',
+    category: 'Web Apps',
+    image: '/projects/comfy-sportware.png',
+    icon: ShoppingBag,
+    accent: '#00A896',
+  },
+  {
+    id: 'skillbridge-ai',
+    index: '02',
     title: 'SkillBridge AI',
-    subtitle: 'AI Career Platform',
-    desc: 'AI-powered career guidance platform with resume analysis, an ATS score checker built on the Gemini API, and a role-specific interview question generator.',
+    subtitle: 'AI Career Guidance Platform',
+    desc: 'AI-powered career guidance platform with personalized learning paths, resume analysis, ATS score checker powered by Gemini API, and role-specific interview preparation.',
     tech: ['React.js', 'Node.js', 'MongoDB', 'Gemini API', 'Tailwind CSS'],
     status: 'Live',
     award: 'Hackathon · 5th place, June 2026',
     github: 'https://github.com/vaishh002/SkillBridgeAI',
     demo: 'https://skill-bridge-ai-theta.vercel.app',
     category: 'AI & Web',
+    image: '/projects/skillbridge-ai.png',
     icon: Sparkles,
     accent: '#C85A32',
-    pattern: 'circuit',
-  },
-  {
-    id: 'vibha-erp',
-    index: '02',
-    title: 'Vibha ERP',
-    subtitle: 'Inventory & Logistics Platform',
-    desc: 'Co-leading an enterprise-grade ERP with 5+ modules — inventory, vendor, customer, production, and master data. 20+ reusable components cut duplicate code across team branches.',
-    tech: ['React.js', 'Vite', 'Tailwind CSS', 'Django REST', 'MySQL'],
-    status: 'In Progress',
-    github: 'https://github.com/tejaspandav8421/Inventory-Management',
-    category: 'Enterprise ERP',
-    icon: Boxes,
-    accent: '#464F38',
-    pattern: 'grid',
   },
   {
     id: 'task-management',
     index: '03',
     title: 'Task Management System',
-    subtitle: 'Full-Stack Task Manager',
-    desc: 'Led a 3-member team to build a browser-based task manager with instant, real-time DOM updates and event-driven state management — no page reloads, ever.',
-    tech: ['React.js', 'Node.js', 'MongoDB', 'JavaScript'],
+    subtitle: 'Full-Stack Role-Based Workflow System',
+    desc: 'Role-based project management portal for modern organizations. Features instant real-time DOM updates, clear role hierarchies (Admin, Manager, Team Lead, Intern), daily reporting, and performance analytics dashboards.',
+    tech: ['React.js', 'Node.js', 'MongoDB', 'Express', 'JavaScript'],
     status: 'Live',
     github: 'https://github.com/vaishh002/TaskManagementSystem',
     demo: 'https://task-management-system-zeta-ten.vercel.app',
-    category: 'Web Apps',
+    category: 'Enterprise ERP',
+    image: '/projects/task-management.png',
     icon: ListChecks,
-    accent: '#C85A32',
-    pattern: 'checklist',
+    accent: '#464F38',
   },
   {
-    id: 'hackathon-website',
+    id: 'athenura-hackathon',
     index: '04',
-    title: 'Athenura',
-    subtitle: 'Hackathon Event Website',
-    desc: 'A 6-page responsive hackathon site — home, about, events, registration, team, contact — serving 100+ live visitors, built from 12+ reusable React components.',
-    tech: ['React.js', 'Vite', 'Tailwind CSS'],
+    title: 'ATH Hackathon 2026',
+    subtitle: 'Hackathon & Innovation Platform',
+    desc: 'Full-featured hackathon event portal with 4-step builder guide, domain tracks (AI, FinTech, SpaceTech, HealthTech), builder testimonials, and real-time registration stats.',
+    tech: ['React.js', 'Vite', 'Tailwind CSS', 'Node.js'],
     status: 'Live',
     github: 'https://github.com/bimalgautam1/Hackathon-Athenura',
     demo: 'https://hackathon.athenura.in/hackathons',
     category: 'Events & LMS',
+    image: '/projects/athenura.png',
     icon: CalendarDays,
-    accent: '#464F38',
-    pattern: 'radial',
+    accent: '#028090',
   },
   {
-    id: 'kaumudi-academy',
+    id: 'vaidehi-academy',
     index: '05',
-    title: 'Kaumudi Academy',
-    subtitle: 'Learning Management System',
-    desc: 'Responsive UI pages and reusable frontend components for an LMS — navigation, course listings, and user dashboards — shipped inside a 2-week sprint.',
+    title: 'Vaidehi Academy',
+    subtitle: 'Sanskrit Learning Management System',
+    desc: 'Responsive learning management system dedicated to Sanskrit education. Features online/offline learning mode selection, course listings, faculty profiles, and student feedback modules.',
     tech: ['React.js', 'Vite', 'Node.js', 'MongoDB'],
-    status: 'In Progress',
+    status: 'Live',
     github: 'https://github.com/AtharvBhorkar/kaumudi-academy',
+    demo: 'https://vaidehiiacademy.vercel.app/',
     category: 'Events & LMS',
+    image: '/projects/vaidehi-academy.png',
     icon: GraduationCap,
     accent: '#C85A32',
-    pattern: 'layers',
+  },
+  {
+    id: 'aman-travels',
+    index: '06',
+    title: 'Aman Tour & Travels Blog',
+    subtitle: 'Travel & Vehicle Booking Platform',
+    desc: 'Responsive travel blog and booking site featuring ride selections, popular getaway packages, smart travel guides, guest reviews, and upcoming tour departures.',
+    tech: ['React.js', 'Vite', 'Tailwind CSS', 'Node.js'],
+    status: 'Live',
+    github: 'https://github.com/AtharvBhorkar/ATAT.git',
+    demo: 'https://www.amantourandtravel.in/',
+    category: 'Web Apps',
+    image: '/projects/aman-travels.png',
+    icon: CalendarDays,
+    accent: '#8C2D19',
   },
 ]
 
 export default function Projects() {
   const [activeTab, setActiveTab] = useState('All Work')
+  const [selectedModalProject, setSelectedModalProject] = useState(null)
 
   const filteredProjects =
     activeTab === 'All Work' ? projects : projects.filter((p) => p.category === activeTab)
@@ -119,11 +140,11 @@ export default function Projects() {
             Featured <span className="italic text-[#C85A32]">Projects</span>
           </h2>
           <p className="font-script text-xl sm:text-2xl text-[#66605B] max-w-lg mx-auto mt-1">
-            Crafting real-world applications from AI platforms to enterprise ERPs
+            Hover over any project screenshot to auto-scroll the page view, or click the eye icon for a full preview.
           </p>
         </div>
 
-        {/* Category Filter Tabs — horizontally scrollable on mobile */}
+        {/* Category Filter Tabs */}
         <div className="mb-14 sm:mb-20 -mx-5 px-5 sm:mx-0 sm:px-0">
           <div className="flex items-center gap-2 overflow-x-auto no-scrollbar sm:flex-wrap sm:justify-center pb-1">
             {categories.map((cat) => {
@@ -156,7 +177,12 @@ export default function Projects() {
         <div className="flex flex-col gap-16 sm:gap-24">
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, i) => (
-              <ProjectRow key={project.id} project={project} reversed={i % 2 === 1} />
+              <ProjectRow
+                key={project.id}
+                project={project}
+                reversed={i % 2 === 1}
+                onOpenModal={() => setSelectedModalProject(project)}
+              />
             ))}
           </AnimatePresence>
         </div>
@@ -167,6 +193,16 @@ export default function Projects() {
           </p>
         )}
       </div>
+
+      {/* Lightbox Screenshot Modal */}
+      <AnimatePresence>
+        {selectedModalProject && (
+          <ProjectModal
+            project={selectedModalProject}
+            onClose={() => setSelectedModalProject(null)}
+          />
+        )}
+      </AnimatePresence>
 
       {/* Bottom wave separator */}
       <div className="w-full absolute bottom-0 left-0 right-0 overflow-hidden leading-none pointer-events-none">
@@ -187,9 +223,10 @@ export default function Projects() {
   )
 }
 
-/* ── Editorial Row: bespoke vector art + content, alternating sides ── */
-function ProjectRow({ project: p, reversed }) {
+/* ── Editorial Row: Screenshot with hover scroll + content ── */
+function ProjectRow({ project: p, reversed, onOpenModal }) {
   const Icon = p.icon
+
   return (
     <motion.div
       layout
@@ -202,15 +239,58 @@ function ProjectRow({ project: p, reversed }) {
         reversed ? 'lg:[direction:rtl]' : ''
       }`}
     >
-      {/* Visual */}
-      <div className={`lg:col-span-5 ${reversed ? 'lg:[direction:ltr]' : ''}`}>
-        <ProjectGlyph project={p} />
+      {/* Interactive Screenshot Box */}
+      <div className={`lg:col-span-6 ${reversed ? 'lg:[direction:ltr]' : ''}`}>
+        <div className="project-card-visual group relative">
+          {/* Full vertical screenshot image */}
+          <img
+            src={p.image}
+            alt={`${p.title} Full Screenshot`}
+            className="project-screenshot-img"
+            loading="lazy"
+          />
+
+          {/* Dark Glass Overlay with Eye & External Link icons */}
+          <div className="project-card-overlay">
+            {/* Eye Icon: View Full Screenshot Modal */}
+            <button
+              onClick={onOpenModal}
+              aria-label={`View full screenshot of ${p.title}`}
+              title="View Full Screenshot"
+              className="project-action-btn project-action-btn--eye"
+            >
+              <Eye size={22} />
+            </button>
+
+            {/* External Link Icon: Visit Live Site */}
+            {p.demo && (
+              <a
+                href={p.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Visit live site for ${p.title}`}
+                title="Visit Live Site"
+                className="project-action-btn project-action-btn--link"
+              >
+                <ExternalLink size={20} />
+              </a>
+            )}
+          </div>
+
+          {/* Top badge indicator */}
+          <div className="absolute top-3 left-3 z-20 pointer-events-none">
+            <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/90 backdrop-blur-md text-[#2C2825] shadow-sm border border-white/40 flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              Live Project
+            </span>
+          </div>
+        </div>
       </div>
 
-      {/* Content */}
-      <div className={`lg:col-span-7 ${reversed ? 'lg:[direction:ltr]' : ''}`}>
+      {/* Content Details */}
+      <div className={`lg:col-span-6 ${reversed ? 'lg:[direction:ltr]' : ''}`}>
         <div className="flex items-start gap-4 sm:gap-5">
-          <span className="font-serif text-3xl sm:text-4xl text-[#2C2825]/15 font-bold leading-none shrink-0 pt-1">
+          <span className="font-serif text-3xl sm:text-4xl text-[#2C2825]/20 font-bold leading-none shrink-0 pt-1">
             {p.index}
           </span>
           <div className="min-w-0 flex-1">
@@ -236,7 +316,7 @@ function ProjectRow({ project: p, reversed }) {
                 className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
                 style={{ backgroundColor: `${p.accent}14`, color: p.accent }}
               >
-                <Icon size={15} />
+                <Icon size={16} />
               </span>
             </h3>
             <p className="text-xs font-semibold text-[#66605B] mt-1 tracking-wide">{p.subtitle}</p>
@@ -262,6 +342,16 @@ function ProjectRow({ project: p, reversed }) {
             </div>
 
             <div className="flex items-center gap-3 mt-6">
+              {/* Eye Button for quick preview */}
+              <button
+                onClick={onOpenModal}
+                className="px-4 py-2.5 rounded-xl border border-[#2C2825]/20 hover:border-[#2C2825] bg-white text-[#2C2825] text-[12px] font-semibold inline-flex items-center gap-2 transition-all duration-200 hover:shadow-sm"
+              >
+                <Eye size={15} />
+                View Screenshot
+              </button>
+
+              {/* Live Preview Button */}
               {p.demo && (
                 <a
                   href={p.demo}
@@ -273,6 +363,8 @@ function ProjectRow({ project: p, reversed }) {
                   <ArrowUpRight size={14} />
                 </a>
               )}
+
+              {/* GitHub Button */}
               {p.github && (
                 <a
                   href={p.github}
@@ -292,148 +384,84 @@ function ProjectRow({ project: p, reversed }) {
   )
 }
 
-/* ── Bespoke generative vector art per project (no stock photography) ── */
-function ProjectGlyph({ project: p }) {
-  const Icon = p.icon
-  const uid = p.id
+/* ── Lightbox Modal Component for Full High-Res Screenshot View ── */
+function ProjectModal({ project, onClose }) {
+  // Close on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [onClose])
 
   return (
     <motion.div
-      whileHover={{ y: -4 }}
-      transition={{ duration: 0.3 }}
-      className="relative aspect-[4/3] rounded-3xl border border-[#EAE3D9] shadow-warm overflow-hidden"
-      style={{ backgroundColor: '#FBF9F5' }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+      className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-3 sm:p-6"
+      onClick={onClose}
     >
-      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
-        <defs>
-          <pattern id={`dots-${uid}`} width="18" height="18" patternUnits="userSpaceOnUse">
-            <circle cx="1.5" cy="1.5" r="1.5" fill={p.accent} opacity="0.14" />
-          </pattern>
-        </defs>
-        <rect width="400" height="300" fill={`url(#dots-${uid})`} />
+      <motion.div
+        initial={{ scale: 0.94, opacity: 0, y: 16 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.94, opacity: 0, y: 16 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+        className="bg-[#FBF9F5] w-full max-w-5xl max-h-[92vh] rounded-3xl overflow-hidden shadow-2xl flex flex-col border border-[#EAE3D9] z-50 relative"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Modal Header */}
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[#EAE3D9] bg-white shrink-0">
+          <div className="flex items-center gap-3">
+            <span
+              className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"
+              style={{ backgroundColor: `${project.accent}14`, color: project.accent }}
+            >
+              {project.category}
+            </span>
+            <div>
+              <h3 className="font-serif text-lg sm:text-xl font-bold text-[#2C2825] leading-tight">
+                {project.title}
+              </h3>
+              <p className="text-xs text-[#66605B]">{project.subtitle}</p>
+            </div>
+          </div>
 
-        {p.pattern === 'circuit' && (
-          <g stroke={p.accent} strokeWidth="1.4" fill="none" opacity="0.5">
-            <path d="M40 240 h70 v-60 h60 v-80 h90" />
-            <path d="M360 60 h-60 v70 h-80 v50 h-60" />
-            <circle cx="40" cy="240" r="4" fill={p.accent} stroke="none" />
-            <circle cx="170" cy="100" r="4" fill={p.accent} stroke="none" />
-            <circle cx="260" cy="230" r="4" fill={p.accent} stroke="none" />
-            <circle cx="360" cy="60" r="4" fill={p.accent} stroke="none" />
-            <circle cx="100" cy="180" r="4" fill={p.accent} stroke="none" />
-          </g>
-        )}
-
-        {p.pattern === 'grid' && (
-          <g opacity="0.55">
-            {Array.from({ length: 4 }).map((_, r) =>
-              Array.from({ length: 5 }).map((_, c) => (
-                <rect
-                  key={`${r}-${c}`}
-                  x={60 + c * 60}
-                  y={60 + r * 50}
-                  width="42"
-                  height="32"
-                  rx="5"
-                  fill={(r + c) % 3 === 0 ? p.accent : 'none'}
-                  fillOpacity={(r + c) % 3 === 0 ? 0.18 : 0}
-                  stroke={p.accent}
-                  strokeOpacity="0.4"
-                  strokeWidth="1.2"
-                />
-              ))
+          <div className="flex items-center gap-3">
+            {project.demo && (
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-terracotta text-xs py-2 px-4 inline-flex items-center gap-1.5 hidden sm:inline-flex"
+              >
+                <span>Live Site</span>
+                <ExternalLink size={14} />
+              </a>
             )}
-          </g>
-        )}
-
-        {p.pattern === 'checklist' && (
-          <g opacity="0.6">
-            {[80, 130, 180, 230].map((y, i) => (
-              <g key={y}>
-                <rect
-                  x="70"
-                  y={y}
-                  width="20"
-                  height="20"
-                  rx="6"
-                  fill={i < 3 ? p.accent : 'none'}
-                  fillOpacity={i < 3 ? 0.85 : 0}
-                  stroke={p.accent}
-                  strokeWidth="1.5"
-                />
-                {i < 3 && (
-                  <path
-                    d={`M75 ${y + 10} l4 4 l8 -8`}
-                    stroke="#FBF9F5"
-                    strokeWidth="2"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                )}
-                <rect x="104" y={y + 6} width={150 - i * 18} height="7" rx="3.5" fill={p.accent} fillOpacity="0.25" />
-              </g>
-            ))}
-          </g>
-        )}
-
-        {p.pattern === 'radial' && (
-          <g opacity="0.5">
-            {Array.from({ length: 12 }).map((_, i) => {
-              const angle = (i / 12) * Math.PI * 2
-              const x2 = 200 + Math.cos(angle) * 110
-              const y2 = 150 + Math.sin(angle) * 110
-              return (
-                <line
-                  key={i}
-                  x1="200"
-                  y1="150"
-                  x2={x2}
-                  y2={y2}
-                  stroke={p.accent}
-                  strokeWidth="1.4"
-                  strokeOpacity={0.15 + (i % 3) * 0.12}
-                />
-              )
-            })}
-            <circle cx="200" cy="150" r="34" fill={p.accent} fillOpacity="0.14" stroke={p.accent} strokeWidth="1.4" />
-          </g>
-        )}
-
-        {p.pattern === 'layers' && (
-          <g opacity="0.6">
-            {[0, 1, 2, 3].map((i) => (
-              <rect
-                key={i}
-                x={90 - i * 6}
-                y={90 + i * 34}
-                width="220"
-                height="24"
-                rx="7"
-                fill={p.accent}
-                fillOpacity={0.1 + i * 0.08}
-                stroke={p.accent}
-                strokeOpacity="0.4"
-                strokeWidth="1.2"
-              />
-            ))}
-          </g>
-        )}
-      </svg>
-
-      {/* Center emblem */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div
-          className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center shadow-md"
-          style={{ backgroundColor: '#FFFFFF', color: p.accent }}
-        >
-          <Icon size={28} strokeWidth={1.6} />
+            <button
+              onClick={onClose}
+              aria-label="Close modal"
+              className="w-9 h-9 rounded-full bg-[#EAE3D9]/60 hover:bg-[#C85A32] hover:text-white text-[#2C2825] flex items-center justify-center transition-colors duration-200"
+            >
+              <X size={18} />
+            </button>
+          </div>
         </div>
-      </div>
 
-      {/* Corner frame accents */}
-      <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 rounded-tl-lg" style={{ borderColor: `${p.accent}55` }} />
-      <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 rounded-br-lg" style={{ borderColor: `${p.accent}55` }} />
+        {/* Modal Body: Scrollable Full Screenshot */}
+        <div className="overflow-y-auto modal-screenshot-scroll p-4 sm:p-6 flex-1 bg-[#EFE8DF]/50">
+          <div className="max-w-4xl mx-auto">
+            <img
+              src={project.image}
+              alt={`${project.title} Full Page Screenshot`}
+              className="w-full h-auto rounded-2xl shadow-md border border-[#EAE3D9] block"
+            />
+          </div>
+        </div>
+      </motion.div>
     </motion.div>
   )
 }
